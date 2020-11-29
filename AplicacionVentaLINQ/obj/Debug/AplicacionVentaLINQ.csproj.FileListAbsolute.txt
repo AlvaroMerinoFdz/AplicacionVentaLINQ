@@ -1,0 +1,10 @@
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\bin\Debug\AplicacionVentaLINQ.exe.config
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\bin\Debug\AplicacionVentaLINQ.exe
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\bin\Debug\AplicacionVentaLINQ.pdb
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\obj\Debug\AplicacionVentaLINQ.csprojAssemblyReference.cache
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\obj\Debug\AplicacionVentaLINQ.Principal.resources
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\obj\Debug\AplicacionVentaLINQ.Properties.Resources.resources
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\obj\Debug\AplicacionVentaLINQ.csproj.GenerateResource.cache
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\obj\Debug\AplicacionVentaLINQ.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\obj\Debug\AplicacionVentaLINQ.exe
+C:\Users\Usuario\source\repos\AplicacionVentaLINQ\AplicacionVentaLINQ\obj\Debug\AplicacionVentaLINQ.pdb
