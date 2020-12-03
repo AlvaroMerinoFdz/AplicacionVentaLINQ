@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ventaModelStoreContainer" CdmEntityContainer="dsBD">
+    <EntitySetMapping Name="materiasprimas">
+      <EntityTypeMapping TypeName="ventaModel.materiasprimas">
+        <MappingFragment StoreEntitySet="materiasprimas">
+          <ScalarProperty Name="idmateriaprima" ColumnName="idmateriaprima" />
+          <ScalarProperty Name="materiaprima" ColumnName="materiaprima" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="medidas">
+      <EntityTypeMapping TypeName="ventaModel.medidas">
+        <MappingFragment StoreEntitySet="medidas">
+          <ScalarProperty Name="idmedida" ColumnName="idmedida" />
+          <ScalarProperty Name="medida" ColumnName="medida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productos">
+      <EntityTypeMapping TypeName="ventaModel.productos">
+        <MappingFragment StoreEntitySet="productos">
+          <ScalarProperty Name="idproducto" ColumnName="idproducto" />
+          <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+          <ScalarProperty Name="idmedida" ColumnName="idmedida" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="borrado" ColumnName="borrado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productosmp">
+      <EntityTypeMapping TypeName="ventaModel.productosmp">
+        <MappingFragment StoreEntitySet="productosmp">
+          <ScalarProperty Name="idproducto" ColumnName="idproducto" />
+          <ScalarProperty Name="idmateriaprima" ColumnName="idmateriaprima" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productospack">
+      <EntityTypeMapping TypeName="ventaModel.productospack">
+        <MappingFragment StoreEntitySet="productospack">
+          <ScalarProperty Name="idproductocompuesto" ColumnName="idproductocompuesto" />
+          <ScalarProperty Name="idproductosimple" ColumnName="idproductosimple" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipos">
+      <EntityTypeMapping TypeName="ventaModel.tipos">
+        <MappingFragment StoreEntitySet="tipos">
+          <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

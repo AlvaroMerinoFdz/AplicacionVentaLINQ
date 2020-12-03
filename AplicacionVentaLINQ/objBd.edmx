@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ventaModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="materiasprimas">
+          <Key>
+            <PropertyRef Name="idmateriaprima" />
+          </Key>
+          <Property Name="idmateriaprima" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="materiaprima" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="medidas">
+          <Key>
+            <PropertyRef Name="idmedida" />
+          </Key>
+          <Property Name="idmedida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="medida" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="idproducto" />
+          </Key>
+          <Property Name="idproducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idtipo" Type="int" />
+          <Property Name="idmedida" Type="int" />
+          <Property Name="precio" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="borrado" Type="int" />
+        </EntityType>
+        <EntityType Name="productosmp">
+          <Key>
+            <PropertyRef Name="idproducto" />
+            <PropertyRef Name="idmateriaprima" />
+          </Key>
+          <Property Name="idproducto" Type="int" Nullable="false" />
+          <Property Name="idmateriaprima" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="productospack">
+          <Key>
+            <PropertyRef Name="idproductocompuesto" />
+            <PropertyRef Name="idproductosimple" />
+          </Key>
+          <Property Name="idproductocompuesto" Type="int" Nullable="false" />
+          <Property Name="idproductosimple" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="tipos">
+          <Key>
+            <PropertyRef Name="idtipo" />
+          </Key>
+          <Property Name="idtipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <Association Name="productos_fk_med">
+          <End Role="medidas" Type="Self.medidas" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medidas">
+              <PropertyRef Name="idmedida" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="idmedida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productos_fk_tip">
+          <End Role="tipos" Type="Self.tipos" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos">
+              <PropertyRef Name="idtipo" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="idtipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productosmp_fk_mp">
+          <End Role="materiasprimas" Type="Self.materiasprimas" Multiplicity="1" />
+          <End Role="productosmp" Type="Self.productosmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiasprimas">
+              <PropertyRef Name="idmateriaprima" />
+            </Principal>
+            <Dependent Role="productosmp">
+              <PropertyRef Name="idmateriaprima" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productosmp_fk_prod">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="productosmp" Type="Self.productosmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="idproducto" />
+            </Principal>
+            <Dependent Role="productosmp">
+              <PropertyRef Name="idproducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productospack_fk_pc">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="productospack" Type="Self.productospack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="idproducto" />
+            </Principal>
+            <Dependent Role="productospack">
+              <PropertyRef Name="idproductocompuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productospack_fk_ps">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="productospack" Type="Self.productospack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="idproducto" />
+            </Principal>
+            <Dependent Role="productospack">
+              <PropertyRef Name="idproductosimple" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ventaModel1StoreContainer">
+          <EntitySet Name="materiasprimas" EntityType="Self.materiasprimas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="medidas" EntityType="Self.medidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productos" EntityType="Self.productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productosmp" EntityType="Self.productosmp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productospack" EntityType="Self.productospack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipos" EntityType="Self.tipos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="productos_fk_med" Association="Self.productos_fk_med">
+            <End Role="medidas" EntitySet="medidas" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="productos_fk_tip" Association="Self.productos_fk_tip">
+            <End Role="tipos" EntitySet="tipos" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="productosmp_fk_mp" Association="Self.productosmp_fk_mp">
+            <End Role="materiasprimas" EntitySet="materiasprimas" />
+            <End Role="productosmp" EntitySet="productosmp" />
+          </AssociationSet>
+          <AssociationSet Name="productosmp_fk_prod" Association="Self.productosmp_fk_prod">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="productosmp" EntitySet="productosmp" />
+          </AssociationSet>
+          <AssociationSet Name="productospack_fk_pc" Association="Self.productospack_fk_pc">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="productospack" EntitySet="productospack" />
+          </AssociationSet>
+          <AssociationSet Name="productospack_fk_ps" Association="Self.productospack_fk_ps">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="productospack" EntitySet="productospack" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ventaModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="materiasprimas">
+          <Key>
+            <PropertyRef Name="idmateriaprima" />
+          </Key>
+          <Property Name="idmateriaprima" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="materiaprima" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="productosmp" Relationship="Self.productosmp_fk_mp" FromRole="materiasprimas" ToRole="productosmp" />
+        </EntityType>
+        <EntityType Name="medidas">
+          <Key>
+            <PropertyRef Name="idmedida" />
+          </Key>
+          <Property Name="idmedida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="medida" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="productos" Relationship="Self.productos_fk_med" FromRole="medidas" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="idproducto" />
+          </Key>
+          <Property Name="idproducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idtipo" Type="Int32" />
+          <Property Name="idmedida" Type="Int32" />
+          <Property Name="precio" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="borrado" Type="Int32" />
+          <NavigationProperty Name="medidas" Relationship="Self.productos_fk_med" FromRole="productos" ToRole="medidas" />
+          <NavigationProperty Name="tipos" Relationship="Self.productos_fk_tip" FromRole="productos" ToRole="tipos" />
+          <NavigationProperty Name="productosmp" Relationship="Self.productosmp_fk_prod" FromRole="productos" ToRole="productosmp" />
+          <NavigationProperty Name="productospack" Relationship="Self.productospack_fk_pc" FromRole="productos" ToRole="productospack" />
+          <NavigationProperty Name="productospack1" Relationship="Self.productospack_fk_ps" FromRole="productos" ToRole="productospack" />
+        </EntityType>
+        <EntityType Name="productosmp">
+          <Key>
+            <PropertyRef Name="idproducto" />
+            <PropertyRef Name="idmateriaprima" />
+          </Key>
+          <Property Name="idproducto" Type="Int32" Nullable="false" />
+          <Property Name="idmateriaprima" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <NavigationProperty Name="materiasprimas" Relationship="Self.productosmp_fk_mp" FromRole="productosmp" ToRole="materiasprimas" />
+          <NavigationProperty Name="productos" Relationship="Self.productosmp_fk_prod" FromRole="productosmp" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="productospack">
+          <Key>
+            <PropertyRef Name="idproductocompuesto" />
+            <PropertyRef Name="idproductosimple" />
+          </Key>
+          <Property Name="idproductocompuesto" Type="Int32" Nullable="false" />
+          <Property Name="idproductosimple" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <NavigationProperty Name="productos" Relationship="Self.productospack_fk_pc" FromRole="productospack" ToRole="productos" />
+          <NavigationProperty Name="productos1" Relationship="Self.productospack_fk_ps" FromRole="productospack" ToRole="productos" />
+        </EntityType>
+        <EntityType Name="tipos">
+          <Key>
+            <PropertyRef Name="idtipo" />
+          </Key>
+          <Property Name="idtipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="productos" Relationship="Self.productos_fk_tip" FromRole="tipos" ToRole="productos" />
+        </EntityType>
+        <Association Name="productosmp_fk_mp">
+          <End Role="materiasprimas" Type="Self.materiasprimas" Multiplicity="1" />
+          <End Role="productosmp" Type="Self.productosmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materiasprimas">
+              <PropertyRef Name="idmateriaprima" />
+            </Principal>
+            <Dependent Role="productosmp">
+              <PropertyRef Name="idmateriaprima" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productos_fk_med">
+          <End Role="medidas" Type="Self.medidas" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medidas">
+              <PropertyRef Name="idmedida" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="idmedida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productos_fk_tip">
+          <End Role="tipos" Type="Self.tipos" Multiplicity="0..1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos">
+              <PropertyRef Name="idtipo" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="idtipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productosmp_fk_prod">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="productosmp" Type="Self.productosmp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="idproducto" />
+            </Principal>
+            <Dependent Role="productosmp">
+              <PropertyRef Name="idproducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productospack_fk_pc">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="productospack" Type="Self.productospack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="idproducto" />
+            </Principal>
+            <Dependent Role="productospack">
+              <PropertyRef Name="idproductocompuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productospack_fk_ps">
+          <End Role="productos" Type="Self.productos" Multiplicity="1" />
+          <End Role="productospack" Type="Self.productospack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="productos">
+              <PropertyRef Name="idproducto" />
+            </Principal>
+            <Dependent Role="productospack">
+              <PropertyRef Name="idproductosimple" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ventaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="materiasprimas" EntityType="Self.materiasprimas" />
+          <EntitySet Name="medidas" EntityType="Self.medidas" />
+          <EntitySet Name="productos" EntityType="Self.productos" />
+          <EntitySet Name="productosmp" EntityType="Self.productosmp" />
+          <EntitySet Name="productospack" EntityType="Self.productospack" />
+          <EntitySet Name="tipos" EntityType="Self.tipos" />
+          <AssociationSet Name="productosmp_fk_mp" Association="Self.productosmp_fk_mp">
+            <End Role="materiasprimas" EntitySet="materiasprimas" />
+            <End Role="productosmp" EntitySet="productosmp" />
+          </AssociationSet>
+          <AssociationSet Name="productos_fk_med" Association="Self.productos_fk_med">
+            <End Role="medidas" EntitySet="medidas" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="productos_fk_tip" Association="Self.productos_fk_tip">
+            <End Role="tipos" EntitySet="tipos" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+          <AssociationSet Name="productosmp_fk_prod" Association="Self.productosmp_fk_prod">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="productosmp" EntitySet="productosmp" />
+          </AssociationSet>
+          <AssociationSet Name="productospack_fk_pc" Association="Self.productospack_fk_pc">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="productospack" EntitySet="productospack" />
+          </AssociationSet>
+          <AssociationSet Name="productospack_fk_ps" Association="Self.productospack_fk_ps">
+            <End Role="productos" EntitySet="productos" />
+            <End Role="productospack" EntitySet="productospack" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ventaModel1StoreContainer" CdmEntityContainer="ventaEntities">
+          <EntitySetMapping Name="materiasprimas">
+            <EntityTypeMapping TypeName="ventaModel1.materiasprimas">
+              <MappingFragment StoreEntitySet="materiasprimas">
+                <ScalarProperty Name="idmateriaprima" ColumnName="idmateriaprima" />
+                <ScalarProperty Name="materiaprima" ColumnName="materiaprima" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medidas">
+            <EntityTypeMapping TypeName="ventaModel1.medidas">
+              <MappingFragment StoreEntitySet="medidas">
+                <ScalarProperty Name="idmedida" ColumnName="idmedida" />
+                <ScalarProperty Name="medida" ColumnName="medida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="ventaModel1.productos">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="idproducto" ColumnName="idproducto" />
+                <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+                <ScalarProperty Name="idmedida" ColumnName="idmedida" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="borrado" ColumnName="borrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productosmp">
+            <EntityTypeMapping TypeName="ventaModel1.productosmp">
+              <MappingFragment StoreEntitySet="productosmp">
+                <ScalarProperty Name="idproducto" ColumnName="idproducto" />
+                <ScalarProperty Name="idmateriaprima" ColumnName="idmateriaprima" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productospack">
+            <EntityTypeMapping TypeName="ventaModel1.productospack">
+              <MappingFragment StoreEntitySet="productospack">
+                <ScalarProperty Name="idproductocompuesto" ColumnName="idproductocompuesto" />
+                <ScalarProperty Name="idproductosimple" ColumnName="idproductosimple" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipos">
+            <EntityTypeMapping TypeName="ventaModel1.tipos">
+              <MappingFragment StoreEntitySet="tipos">
+                <ScalarProperty Name="idtipo" ColumnName="idtipo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

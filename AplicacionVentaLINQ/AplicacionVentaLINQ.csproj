@@ -33,8 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,14 +53,80 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BDVenta.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDVenta.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BDVenta.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDVenta.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BDVenta.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDVenta.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MateriaPrima.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MateriaPrima.Designer.cs">
+      <DependentUpon>MateriaPrima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="materiasprimas.cs">
+      <DependentUpon>objBd.tt</DependentUpon>
+    </Compile>
+    <Compile Include="medidas.cs">
+      <DependentUpon>objBd.tt</DependentUpon>
+    </Compile>
+    <Compile Include="objBd.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>objBd.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="objBd.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>objBd.tt</DependentUpon>
+    </Compile>
+    <Compile Include="objBd.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>objBd.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Principal.Designer.cs">
       <DependentUpon>Principal.cs</DependentUpon>
     </Compile>
+    <Compile Include="productos.cs">
+      <DependentUpon>objBd.tt</DependentUpon>
+    </Compile>
+    <Compile Include="productosmp.cs">
+      <DependentUpon>objBd.tt</DependentUpon>
+    </Compile>
+    <Compile Include="productospack.cs">
+      <DependentUpon>objBd.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tipos.cs">
+      <DependentUpon>objBd.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MateriaPrima.resx">
+      <DependentUpon>MateriaPrima.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
     </EmbeddedResource>
@@ -66,6 +139,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EntityDeploy Include="BDVenta.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BDVenta.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BDVenta.edmx.diagram">
+      <DependentUpon>BDVenta.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="objBd.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>objBd.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="objBd.edmx.diagram">
+      <DependentUpon>objBd.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -78,6 +166,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BDVenta.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BDVenta.Context.cs</LastGenOutput>
+      <DependentUpon>BDVenta.edmx</DependentUpon>
+    </Content>
+    <Content Include="BDVenta.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BDVenta.edmx</DependentUpon>
+      <LastGenOutput>BDVenta.cs</LastGenOutput>
+    </Content>
+    <Content Include="objBd.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>objBd.edmx</DependentUpon>
+      <LastGenOutput>objBd.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="objBd.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>objBd.edmx</DependentUpon>
+      <LastGenOutput>objBd.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
