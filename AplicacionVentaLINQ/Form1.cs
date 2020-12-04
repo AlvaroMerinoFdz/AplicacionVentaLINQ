@@ -28,6 +28,7 @@ namespace AplicacionVentaLINQ
                 materiasprimas objMatPrima = new materiasprimas();
                 String materia = txtDescripcion.Text;
                 var materias = from m in objBd.materiasprimas
+
                               select m.materiaprima;
 
                 if (materias.Contains(materia.Trim().ToUpper()))
